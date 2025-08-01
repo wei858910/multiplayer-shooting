@@ -156,7 +156,13 @@ void ABlasterPlayerController::CheckPing(float DeltaTime)
 	HighPingRunningTime += DeltaTime;
 	if (HighPingRunningTime > CheckPingFrequency)
 	{
-		PlayerState = PlayerState == nullptr ? GetPlayerState<APlayerState>() : PlayerState; // 这一句没必要吧
+		// PlayerState = (PlayerState == nullptr ? GetPlayerState<APlayerState>() : PlayerState); // 这一句没必要吧
+		
+		if (PlayerState == nullptr)
+		{
+			PlayerState = GetPlayerState<APlayerState>();
+		}
+		
 		if (PlayerState)
 		{
 			//if(!HasAuthority()) UE_LOG(LogTemp, Warning, TEXT("Ping: %f"), PlayerState->GetPingInMilliseconds());
